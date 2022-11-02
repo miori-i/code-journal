@@ -4,57 +4,48 @@ header {
   left: 0;
   right: 0;
   background-color: #562b81;
-  margin: 0 auto;
 }
 
 body {
   background-color: #f0f0f0;
+  font-family: "Proza Libre", sans-serif;
 }
 
 .header-code-journal {
-  /* position: absolute; */
-
-  width: 123px;
-  height: 27px;
-
-  /* left: 300px;
-  top: -5px; */
   font-family: "Proza Libre", sans-serif;
-  font-style: normal;
-  font-weight: 400;
   font-size: 20px;
-  line-height: 27px;
+  line-height: 18px;
   color: #fff;
 }
 
 .header-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  width: 750px;
   margin: auto;
+  max-width: 760px;
 }
 
 form {
-  font-family: "Proza Libre", sans-serif;
   color: #292929;
 }
 
 .new-entry {
   font-weight: 600;
-  font-size: 28px;
+  font-size: 25px;
   line-height: 0;
+  margin: 0;
+  padding-top: 53px;
+  padding-left: 0.75rem;
 }
 
 img {
   width: 100%;
+  height: 330px;
+  object-fit: cover;
   border-radius: 4px;
   margin-bottom: 30px;
 }
 
 .text-in-form {
   font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
   margin-bottom: 10px;
 }
 

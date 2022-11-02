@@ -6,7 +6,7 @@
   max-width: 575px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  padding-top: 70px;
+  padding-top: 30px;
 }
 
 .row {
@@ -34,12 +34,22 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .header-wrapper {
+    width: 527px;
+  }
+}
+
 @media screen and (max-width: 420px) {
-  html {
+  body {
     width: 100%;
   }
 
   .header-wrapper {
-    padding-left: 15px;
+    width: 366px;
+  }
+
+  .new-entry {
+    padding-left: 0.5rem;
   }
 }

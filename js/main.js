@@ -1,12 +1,12 @@
 /* global data */
 
 var $photoUrl = document.getElementById('photo-url');
-
 var $img = document.getElementById('image');
 
 // Listen for 'input' events on the photoUrl input to update the src attribute
 // of the photo preview when the input value changes.
 $photoUrl.addEventListener('input', function (event) {
+
   $img.setAttribute('src', $photoUrl.value);
 
 });
@@ -15,6 +15,7 @@ $photoUrl.addEventListener('input', function (event) {
 var $form = document.querySelector('form');
 
 $form.addEventListener('submit', function (event) {
+  event.preventDefault();
 
   // Put the form's input values into a new object.
   var entry = {};
