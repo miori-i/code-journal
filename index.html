@@ -11,14 +11,68 @@
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
+    <div class="header-wrapper">
+      <h3 class="header-code-journal">Code Journal</h3>
+    </div>
   </header>
   <main>
+
+    <div class="container">
+      <h3 class="new-entry">New Entry</h3>
+    </div>
+
+    <div data-view="entry-form">
+      <form>
+        <div class="container">
+          <div class="row">
+            <div class="column-half">
+              <img src="images/placeholder-image-square.jpg" alt="image-square" id="image">
+            </div>
+            <div class="column-half">
+              <div class="text-in-form">
+                <label for="title">Title</label>
+              </div>
+              <div class="box-in-form">
+                <input required type="text" name="title" id="title">
+              </div>
+              <div class="text-in-form">
+                <label for="photo-url">Photo URL</label>
+              </div>
+              <div class="box-in-form">
+                <input required type="url" name="photo-url" id="photo-url">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <div class="text-in-form">
+                <label for="notes">Notes</label>
+              </div>
+              <div class="box-in-form">
+                <textarea required name="notes" id="notes" rows="7"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <div class="save-button">
+                <button class="save-button-detail">SAVE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
