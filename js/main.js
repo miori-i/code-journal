@@ -129,3 +129,10 @@ $tabContainer.addEventListener('click', function (event) {
     }
   }
 });
+
+// Listen 'click' events for showing the 'entry form' view by clicking NEW button
+var $buttons = document.querySelectorAll('button');
+$buttons[1].addEventListener('click', function () {
+  $views[0].className = 'view';
+  $views[1].className = 'view hidden';
+});
