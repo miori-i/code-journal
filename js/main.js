@@ -38,6 +38,10 @@ $form.addEventListener('submit', function (event) {
   // Reset the form inputs.
   $form.reset();
 
+  // Creates a new DOM tree for it and adds it to the page
+  var $newDOMtree = renderEntry(entry);
+  $ul.prepend($newDOMtree);
+
 });
 
 // Define a function that takes a single journal entry object and
@@ -92,14 +96,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Listen for 'click' events for view swapping
-
 var $tabContainer = document.querySelector('.tab-container');
 var $tabs = document.querySelectorAll('.tab');
 var $views = document.querySelectorAll('.view');
 
 $tabContainer.addEventListener('click', function (event) {
 
-  // if event.target is equal to the elements with the class atttribute with the value of tab
+  // If event.target is equal to the elements with the class atttribute with the value of tab
   if (event.target.matches('.tab')) {
 
     for (var i = 0; i < $tabs.length; i++) {
@@ -110,7 +113,7 @@ $tabContainer.addEventListener('click', function (event) {
       }
     }
 
-    // decide which page will be shown
+    // Decides which page will be shown
     var $dataView = event.target.getAttribute('data-view');
 
     for (var n = 0; n < $views.length; n++) {
