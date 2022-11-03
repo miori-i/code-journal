@@ -42,6 +42,10 @@ $form.addEventListener('submit', function (event) {
   var $newDOMtree = renderEntry(entry);
   $ul.prepend($newDOMtree);
 
+  // Automatically shows the 'entries' view without reloading the page.
+  $views[0].className = 'view hidden';
+  $views[1].className = 'view';
+
 });
 
 // Define a function that takes a single journal entry object and
