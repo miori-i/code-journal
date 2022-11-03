@@ -48,7 +48,7 @@ function renderEntry(object) {
   var $li = document.createElement('li');
 
   var $container = document.createElement('div');
-  $container.setAttribute('class', 'container');
+  $container.setAttribute('class', 'container3');
   $li.appendChild($container);
 
   var $row = document.createElement('div');
@@ -82,11 +82,43 @@ function renderEntry(object) {
 // Use a loop to create a DOM tree for each journal entry in the data model
 // and append it to the page when the 'DOMContentLoaded' event is fired.
 
-var $ul = document.querySelector('.unordered-list');
+var $ul = document.querySelector('.entries-unordered-list');
 
 document.addEventListener('DOMContentLoaded', function () {
   for (var i = 0; i < data.entries.length; i++) {
     var domTree = renderEntry(data.entries[i]);
     $ul.appendChild(domTree);
+  }
+});
+
+// Listen for 'click' events for view swapping
+
+var $tabContainer = document.querySelector('.tab-container');
+var $tabs = document.querySelectorAll('.tab');
+var $views = document.querySelectorAll('.view');
+
+$tabContainer.addEventListener('click', function (event) {
+
+  // if event.target is equal to the elements with the class atttribute with the value of tab
+  if (event.target.matches('.tab')) {
+
+    for (var i = 0; i < $tabs.length; i++) {
+      if ($tabs[i] === event.target) {
+        $tabs[i].className = 'tab active';
+      } else {
+        $tabs[i].className = 'tab';
+      }
+    }
+
+    // decide which page will be shown
+    var $dataView = event.target.getAttribute('data-view');
+
+    for (var n = 0; n < $views.length; n++) {
+      if ($dataView === $views[n].getAttribute('data-view')) {
+        $views[n].className = 'view';
+      } else {
+        $views[n].className = 'view hidden';
+      }
+    }
   }
 });

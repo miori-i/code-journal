@@ -26,7 +26,11 @@ a {
   color: white;
 }
 
-.code-journal {
+.navbar-unordered-list {
+  padding: 0;
+}
+
+.nav-code-journal {
   font-size: 20px;
 }
 
@@ -40,6 +44,15 @@ form {
   line-height: 0;
   margin: 0;
   padding-top: 53px;
+  padding-left: 0.75rem;
+}
+
+.entries {
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 0;
+  margin: 0;
+  padding-top: 15px;
   padding-left: 0.75rem;
 }
 
@@ -85,17 +98,45 @@ textarea:focus {
   padding: 7px 15px;
   border: none;
   border-radius: 4px;
+  margin-bottom: 30px;
 }
 
-ul {
+.entries-unordered-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+}
+
+.h3-and-newbutton-unordered-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  margin: 0;
+  margin-top: 15px;
+}
+
+.new-button-detail {
+  color: white;
+  background-color: #562b81;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 4px;
 }
 
 /* ----- media query -----  */
 
 @media screen and (min-width: 768px) {
   .container {
+    max-width: 820px;
+  }
+
+  .container2 {
+    max-width: 820px;
+  }
+
+  .container3 {
     max-width: 820px;
   }
 
@@ -115,16 +156,21 @@ ul {
   }
 }
 
+/* mobile screen */
 @media screen and (max-width: 420px) {
   body {
     width: 100%;
   }
 
   .navbar {
-    width: 357px;
+    width: 327px;
   }
 
   .new-entry {
+    padding-left: 0.5rem;
+  }
+
+  .entries {
     padding-left: 0.5rem;
   }
 
