@@ -44,8 +44,6 @@ $form.addEventListener('submit', function (event) {
 //  returns a DOM tree that matches one of the example entries in the HTML.
 
 function renderEntry(object) {
-  // console.log('object:', object);
-  // console.log('photoUrl:', object.photoUrl);
 
   var $li = document.createElement('li');
 
@@ -77,9 +75,18 @@ function renderEntry(object) {
   $p.textContent = object.notes;
   $columnHalf2.appendChild($p);
 
-  // console.log('data.entries[0]:', data.entries[0]);
   return $li;
 
 }
 
-renderEntry(data.entries[0]);
+// Use a loop to create a DOM tree for each journal entry in the data model
+// and append it to the page when the 'DOMContentLoaded' event is fired.
+
+var $ul = document.querySelector('.unordered-list');
+
+document.addEventListener('DOMContentLoaded', function () {
+  for (var i = 0; i < data.entries.length; i++) {
+    var domTree = renderEntry(data.entries[i]);
+    $ul.appendChild(domTree);
+  }
+});
