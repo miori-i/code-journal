@@ -39,3 +39,47 @@ $form.addEventListener('submit', function (event) {
   $form.reset();
 
 });
+
+// Define a function that takes a single journal entry object and
+//  returns a DOM tree that matches one of the example entries in the HTML.
+
+function renderEntry(object) {
+  // console.log('object:', object);
+  // console.log('photoUrl:', object.photoUrl);
+
+  var $li = document.createElement('li');
+
+  var $container = document.createElement('div');
+  $container.setAttribute('class', 'container');
+  $li.appendChild($container);
+
+  var $row = document.createElement('div');
+  $row.setAttribute('class', 'row');
+  $container.appendChild($row);
+
+  var $columnHalf1 = document.createElement('div');
+  $columnHalf1.setAttribute('class', 'column-half');
+  $row.appendChild($columnHalf1);
+
+  var $image = document.createElement('img');
+  $image.setAttribute('src', object.photoUrl);
+  $columnHalf1.appendChild($image);
+
+  var $columnHalf2 = document.createElement('div');
+  $columnHalf2.setAttribute('class', 'column-half');
+  $row.appendChild($columnHalf2);
+
+  var $h2 = document.createElement('h2');
+  $h2.textContent = object.title;
+  $columnHalf2.appendChild($h2);
+
+  var $p = document.createElement('p');
+  $p.textContent = object.notes;
+  $columnHalf2.appendChild($p);
+
+  // console.log('data.entries[0]:', data.entries[0]);
+  return $li;
+
+}
+
+renderEntry(data.entries[0]);

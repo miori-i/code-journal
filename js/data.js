@@ -10,7 +10,7 @@ var data = {
 // To write the data in entries property before unload, stginfy it
 window.addEventListener('beforeunload', function (event) {
   var entriesJSON = JSON.stringify(data);
-  localStorage.setItem('javascript-strage', entriesJSON);
+  localStorage.setItem('javascript-storage', entriesJSON);
 });
 
 var $entries = localStorage.getItem('javascript-storage');
