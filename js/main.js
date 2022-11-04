@@ -77,12 +77,17 @@ function renderEntry(object) {
   $row.appendChild($columnHalf2);
 
   var $h2 = document.createElement('h2');
+  $h2.setAttribute('class', 'placing-icon');
   $h2.textContent = object.title;
   $columnHalf2.appendChild($h2);
 
   var $p = document.createElement('p');
   $p.textContent = object.notes;
   $columnHalf2.appendChild($p);
+
+  var $icon = document.createElement('i');
+  $icon.setAttribute('class', 'fa-solid fa-pencil fa-sm edit-icon');
+  $h2.appendChild($icon);
 
   return $li;
 

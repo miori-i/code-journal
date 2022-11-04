@@ -127,6 +127,21 @@ textarea:focus {
   margin-top: 60px;
 }
 
+.placing-icon {
+  position: relative;
+}
+
+.edit-icon {
+  position: absolute;
+  right: 3px;
+  top: 15px;
+  color: #562b81;
+}
+
+h2 {
+  margin-top: 0;
+}
+
 /* ----- media query -----  */
 
 @media screen and (min-width: 768px) {
