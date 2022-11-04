@@ -43,9 +43,7 @@ $form.addEventListener('submit', function (event) {
   $ul.prepend($newDOMtree);
 
   // Automatically shows the 'entries' view without reloading the page.
-  $views[0].className = 'view';
-  $views[1].className = 'view hidden';
-  $views[2].className = 'view';
+  viewSwapping('entries');
 
   // Removes the p element that shows there is no entry
   $paragraph.remove();
