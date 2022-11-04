@@ -20,31 +20,27 @@
 </head>
 <body>
 
-
   <header>
     <nav class="navbar">
-      <div class="tab-container">
-        <ul class="navbar-unordered-list">
-          <li>
-            <div class="nav-code-journal">
-              <a href="#" class="tab active" data-view="entry-form" name="code-journal">Code Journal</a>
-            </div>
-          </li>
-          <li>
-            <div class="nav-entries">
-              <a href="#" class="tab" data-view="entries" name="entries">Entries</a>
-            </div>
-          </li>
-          <li>
-            <div class="nav-new-button">
-              <a href="#" class="tab" data-view="entries" name="new">NEW</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <ul class="navbar-unordered-list">
+        <li>
+          <div class="nav-code-journal">
+            <a href="#" data-view="entry-form" name="code-journal">Code Journal</a>
+          </div>
+        </li>
+        <li>
+          <div class="nav-entries">
+            <a href="#" data-view="entries" name="entries">Entries</a>
+          </div>
+        </li>
+        <li>
+          <div class="view">
+            <a href="#" data-view="entries" class="nav-new-button" name="new">NEW</a>
+          </div>
+        </li>
+      </ul>
     </nav>
   </header>
-
 
   <main>
     <!-- ----- entry form ----- -->
@@ -94,7 +90,6 @@
       </form>
     </div>
 
-
     <!-- ----- entries ----- -->
     <div data-view="entries" class="view hidden">
 
@@ -105,7 +100,6 @@
           </li>
         </ul>
       </div>
-
 
       <ul class="entries-unordered-list">
       </ul>

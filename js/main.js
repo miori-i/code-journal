@@ -43,9 +43,12 @@ $form.addEventListener('submit', function (event) {
   $ul.prepend($newDOMtree);
 
   // Automatically shows the 'entries' view without reloading the page.
-  $views[0].className = 'view hidden';
-  $views[1].className = 'view';
+  $views[0].className = 'view';
+  $views[1].className = 'view hidden';
+  $views[2].className = 'view';
 
+  // Removes the p element that shows there is no entry
+  $paragraph.remove();
 });
 
 // Define a function that takes a single journal entry object and
@@ -114,13 +117,24 @@ var $views = document.querySelectorAll('.view');
 function viewSwapping(dataView) {
   data.view = dataView;
   if (dataView === 'code-journal') {
-    $views[0].className = 'view';
-    $views[1].className = 'view hidden';
-  } else if (dataView === 'entries') {
     $views[0].className = 'view hidden';
     $views[1].className = 'view';
-  } else if (dataView === 'new') {
+    $views[2].className = 'view hidden';
+  } else if (dataView === 'entries') {
     $views[0].className = 'view';
     $views[1].className = 'view hidden';
+    $views[2].className = 'view';
+  } else if (dataView === 'new') {
+    $views[0].className = 'view hidden';
+    $views[1].className = 'view';
+    $views[2].className = 'view hidden';
   }
+}
+
+// Shows that there is no entry added
+if (data.entries.length === 0) {
+  var $paragraph = document.createElement('p');
+  $paragraph.textContent = 'No entries have been recorded.';
+  $paragraph.setAttribute('class', 'no-entries');
+  $ul.appendChild($paragraph);
 }
