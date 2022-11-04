@@ -158,9 +158,13 @@ $ul.addEventListener('click', function (event) {
     // and assign it to the data model's editing property if an edit icon was clicked.
     var dataEntryId = event.target.closest('li').getAttribute('data-entry-id');
     // console.log('dataEntryId:', dataEntryId);
-    // console.log('data.editing', data.editing);
-    data.editing = dataEntryId;
-    // console.log('data.editing after updated', data.editing);
+    for (var i = 0; i < data.entries.length; i++) {
+      if (dataEntryId === data.entries[i].title) {
+        data.editing = data.entries[i];
+      }
+    }
+
+    // Pre-populate the entry form with the clicked entry's values from the object found in the data model.
 
   }
 
