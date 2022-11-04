@@ -165,7 +165,10 @@ $ul.addEventListener('click', function (event) {
     }
 
     // Pre-populate the entry form with the clicked entry's values from the object found in the data model.
-
+    $form.elements.title.value = data.editing.title;
+    $form.elements['photo-url'].value = data.editing.photoUrl;
+    $img.setAttribute('src', data.editing.photoUrl);
+    $form.elements.notes.value = data.editing.notes;
   }
 
 });
