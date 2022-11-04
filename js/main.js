@@ -91,48 +91,36 @@ function renderEntry(object) {
 // and append it to the page when the 'DOMContentLoaded' event is fired.
 
 var $ul = document.querySelector('.entries-unordered-list');
-
 document.addEventListener('DOMContentLoaded', function () {
   for (var i = 0; i < data.entries.length; i++) {
     var domTree = renderEntry(data.entries[i]);
     $ul.appendChild(domTree);
   }
+  // refreshing the pages shows the same view as before refreshing.
+  viewSwapping(data.view);
 });
 
-// Listen for 'click' events for view swapping
-var $tabContainer = document.querySelector('.tab-container');
-var $tabs = document.querySelectorAll('.tab');
-var $views = document.querySelectorAll('.view');
-
-$tabContainer.addEventListener('click', function (event) {
-
-  // If event.target is equal to the elements with the class atttribute with the value of tab
-  if (event.target.matches('.tab')) {
-
-    for (var i = 0; i < $tabs.length; i++) {
-      if ($tabs[i] === event.target) {
-        $tabs[i].className = 'tab active';
-      } else {
-        $tabs[i].className = 'tab';
-      }
-    }
-
-    // Decides which page will be shown
-    var $dataView = event.target.getAttribute('data-view');
-
-    for (var n = 0; n < $views.length; n++) {
-      if ($dataView === $views[n].getAttribute('data-view')) {
-        $views[n].className = 'view';
-      } else {
-        $views[n].className = 'view hidden';
-      }
-    }
+// Function that is called when the links(a tages) are pressed
+document.addEventListener('click', function (event) {
+  if (event.target.tagName !== 'A') {
+    return null;
   }
+  // Decides which page will be shown with the info by clicking
+  viewSwapping(event.target.name);
 });
 
-// Listen 'click' events for showing the 'entry form' view by clicking NEW button
-var $buttons = document.querySelectorAll('button');
-$buttons[1].addEventListener('click', function () {
-  $views[0].className = 'view';
-  $views[1].className = 'view hidden';
-});
+// View swapping function
+var $views = document.querySelectorAll('.view');
+function viewSwapping(dataView) {
+  data.view = dataView;
+  if (dataView === 'code-journal') {
+    $views[0].className = 'view';
+    $views[1].className = 'view hidden';
+  } else if (dataView === 'entries') {
+    $views[0].className = 'view hidden';
+    $views[1].className = 'view';
+  } else if (dataView === 'new') {
+    $views[0].className = 'view';
+    $views[1].className = 'view hidden';
+  }
+}
