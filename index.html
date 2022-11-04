@@ -19,18 +19,35 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
   <header>
-    <div class="header-wrapper">
-      <h3 class="header-code-journal">Code Journal</h3>
-    </div>
+    <nav class="navbar">
+      <ul class="navbar-unordered-list">
+        <li>
+          <div class="nav-code-journal">
+            <a href="#" data-view="entry-form" name="code-journal">Code Journal</a>
+          </div>
+        </li>
+        <li>
+          <div class="nav-entries">
+            <a href="#" data-view="entries" name="entries">Entries</a>
+          </div>
+        </li>
+        <li>
+          <div class="view">
+            <a href="#" data-view="entries" class="nav-new-button" name="new">NEW</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
   </header>
+
   <main>
-
-    <div class="container">
-      <h3 class="new-entry">New Entry</h3>
-    </div>
-
-    <div data-view="entry-form">
+    <!-- ----- entry form ----- -->
+    <div data-view="entry-form" class="view">
+      <div class="container">
+        <h3 class="new-entry">New Entry</h3>
+      </div>
       <form>
         <div class="container">
           <div class="row">
@@ -72,6 +89,22 @@
         </div>
       </form>
     </div>
+
+    <!-- ----- entries ----- -->
+    <div data-view="entries" class="view hidden">
+
+      <div class="container2">
+        <ul class="h3-and-newbutton-unordered-list">
+          <li>
+            <h3 class="entries">Entries</h3>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="entries-unordered-list">
+      </ul>
+    </div>
+
 
   </main>
   <script src="js/data.js"></script>
