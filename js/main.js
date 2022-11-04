@@ -142,3 +142,8 @@ if (data.entries.length === 0) {
   $paragraph.setAttribute('class', 'no-entries');
   $ul.appendChild($paragraph);
 }
+
+// Listen for clicks on the parent element of all rendered entries.
+// the parent element = $ul
+$ul.addEventListener('click', function (event) {
+});
