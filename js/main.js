@@ -55,6 +55,7 @@ $form.addEventListener('submit', function (event) {
 function renderEntry(object) {
 
   var $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', object.title);
 
   var $container = document.createElement('div');
   $container.setAttribute('class', 'container3');
