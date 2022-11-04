@@ -88,6 +88,7 @@ function renderEntry(object) {
 
   var $icon = document.createElement('i');
   $icon.setAttribute('class', 'fa-solid fa-pencil fa-sm edit-icon');
+  $icon.setAttribute('name', 'icon');
   $h2.appendChild($icon);
 
   return $li;
@@ -146,4 +147,11 @@ if (data.entries.length === 0) {
 // Listen for clicks on the parent element of all rendered entries.
 // the parent element = $ul
 $ul.addEventListener('click', function (event) {
+  // console.log('$ul', $ul);
+  // console.log('event.target:', event.target);
+  // console.log('event.target.getAttribute("name"):', event.target.getAttribute('name'));
+  if (event.target.getAttribute('name') === 'icon') {
+    // console.log('icon was clicked');
+    viewSwapping('code-journal');
+  }
 });
