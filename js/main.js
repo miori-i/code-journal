@@ -151,7 +151,17 @@ $ul.addEventListener('click', function (event) {
   // console.log('event.target:', event.target);
   // console.log('event.target.getAttribute("name"):', event.target.getAttribute('name'));
   if (event.target.getAttribute('name') === 'icon') {
-    // console.log('icon was clicked');
+    // Show the entry form if an edit icon was clicked.
     viewSwapping('code-journal');
+
+    // Find the matching entry object in the data model
+    // and assign it to the data model's editing property if an edit icon was clicked.
+    var dataEntryId = event.target.closest('li').getAttribute('data-entry-id');
+    // console.log('dataEntryId:', dataEntryId);
+    // console.log('data.editing', data.editing);
+    data.editing = dataEntryId;
+    // console.log('data.editing after updated', data.editing);
+
   }
+
 });
