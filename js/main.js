@@ -17,36 +17,61 @@ var $form = document.querySelector('form');
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
 
-  // Put the form's input values into a new object.
-  var entry = {};
-  entry.title = $form.elements.title.value;
-  entry.photoUrl = $form.elements['photo-url'].value;
-  entry.notes = $form.elements.notes.value;
+  if (data.editing !== null) {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].title === data.editing.title) {
+        data.entries[i].title = $form.elements.title.value;
+        data.entries[i].photoUrl = $form.elements['photo-url'].value;
+        data.entries[i].notes = $form.elements.notes.value;
+        data.entries[i].nextEntryId = data.editing.nextEntryId;
 
-  // Add the nextEntryId to the object.
-  entry.nextEntryId = data.nextEntryId;
+        // Reset the image preview's `src' attribute.
+        $img.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  // Increment the nextEntryId on the data model.
-  data.nextEntryId++;
+        // Reset the form inputs.
+        $form.reset();
 
-  // Prepend the new object to the entries in the data model.
-  data.entries.unshift(entry);
+        // Automatically shows the 'entries' view without reloading the page.
+        viewSwapping('entries');
+      }
+    }
 
-  // Reset the image preview's `src' attribute.
-  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  } else if (data.editing === null) {
 
-  // Reset the form inputs.
-  $form.reset();
+    // Put the form's input values into a new object.
+    var entry = {};
+    entry.title = $form.elements.title.value;
+    entry.photoUrl = $form.elements['photo-url'].value;
+    entry.notes = $form.elements.notes.value;
 
-  // Creates a new DOM tree for it and adds it to the page
-  var $newDOMtree = renderEntry(entry);
-  $ul.prepend($newDOMtree);
+    // Add the nextEntryId to the object.
+    entry.nextEntryId = data.nextEntryId;
 
-  // Automatically shows the 'entries' view without reloading the page.
-  viewSwapping('entries');
+    // Increment the nextEntryId on the data model.
+    data.nextEntryId++;
 
-  // Removes the p element that shows there is no entry
-  $paragraph.remove();
+    // Prepend the new object to the entries in the data model.
+    data.entries.unshift(entry);
+
+    // Creates a new DOM tree for it and adds it to the page
+    var $newDOMtree = renderEntry(entry);
+    $ul.prepend($newDOMtree);
+
+    // Reset the image preview's `src' attribute.
+    $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+
+    // Reset the form inputs.
+    $form.reset();
+
+    // Automatically shows the 'entries' view without reloading the page.
+    viewSwapping('entries');
+
+  }
+  // Reset the value of data.editing
+  data.editing = null;
+
+  // // Removes the p element that shows there is no entry
+  // $paragraph.remove();
 });
 
 // Define a function that takes a single journal entry object and
@@ -169,6 +194,12 @@ $ul.addEventListener('click', function (event) {
     $form.elements['photo-url'].value = data.editing.photoUrl;
     $img.setAttribute('src', data.editing.photoUrl);
     $form.elements.notes.value = data.editing.notes;
+
+    // console.log('event.target:', event.target);
+    // console.log('event.target.closest("li"):', event.target.closest('li'));
+    // console.log('dataEntryId:', dataEntryId);
+    // console.log('data.editing.title:', data.editing.title);
+
   }
 
 });
