@@ -156,8 +156,8 @@ h2 {
 
   .container2 {
     max-width: 820px;
-    padding: 40px 35px;
-    padding-bottom: 0;
+    padding: 45px 35px;
+    padding-bottom: 5px;
   }
 
   .container3 {
@@ -188,8 +188,8 @@ h2 {
   }
 
   .container2 {
-    padding: 40px 24px;
-    padding-bottom: 0;
+    padding: 45px 24px;
+    padding-bottom: 5px;
   }
 }
 
