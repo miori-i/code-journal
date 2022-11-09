@@ -19,11 +19,25 @@ $form.addEventListener('submit', function (event) {
 
   if (data.editing !== null) {
     for (var i = 0; i < data.entries.length; i++) {
+
       if (data.entries[i].title === data.editing.title) {
+        // update the existing object in entries.
+
+        var titleInEditingBeforeUpdated = data.editing.title;
+
         data.entries[i].title = $form.elements.title.value;
         data.entries[i].photoUrl = $form.elements['photo-url'].value;
         data.entries[i].notes = $form.elements.notes.value;
         data.entries[i].nextEntryId = data.editing.nextEntryId;
+
+        // Update the existing DOM and adds it to the page
+        var $doms = document.querySelectorAll('li[data-entry-id]');
+        for (var n = 0; n < $doms.length; n++) {
+          if ($doms[n].getAttribute('data-entry-id') === titleInEditingBeforeUpdated) {
+            var $updatedDOMtree = renderEntry(data.entries[i]);
+            $doms[n].replaceWith($updatedDOMtree);
+          }
+        }
 
         // Reset the image preview's `src' attribute.
         $img.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -66,12 +80,12 @@ $form.addEventListener('submit', function (event) {
     // Automatically shows the 'entries' view without reloading the page.
     viewSwapping('entries');
 
+    // Removes the p element that shows there is no entry
+    $paragraph.remove();
   }
   // Reset the value of data.editing
   data.editing = null;
 
-  // // Removes the p element that shows there is no entry
-  // $paragraph.remove();
 });
 
 // Define a function that takes a single journal entry object and
@@ -161,14 +175,6 @@ function viewSwapping(dataView) {
   }
 }
 
-// Shows that there is no entry added
-if (data.entries.length === 0) {
-  var $paragraph = document.createElement('p');
-  $paragraph.textContent = 'No entries have been recorded.';
-  $paragraph.setAttribute('class', 'no-entries');
-  $ul.appendChild($paragraph);
-}
-
 // Listen for clicks on the parent element of all rendered entries.
 // the parent element = $ul
 $ul.addEventListener('click', function (event) {
@@ -203,3 +209,11 @@ $ul.addEventListener('click', function (event) {
   }
 
 });
+
+// Shows that there is no entry added
+if (data.entries.length === 0) {
+  var $paragraph = document.createElement('p');
+  $paragraph.textContent = 'No entries have been recorded.';
+  $paragraph.setAttribute('class', 'no-entries');
+  $ul.appendChild($paragraph);
+}
