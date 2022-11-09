@@ -39,6 +39,10 @@ $form.addEventListener('submit', function (event) {
           }
         }
 
+        // Reset the title for the form
+        var $title = document.querySelectorAll('h3');
+        $title[0].textContent = 'New Entry';
+
         // Reset the image preview's `src' attribute.
         $img.setAttribute('src', 'images/placeholder-image-square.jpg');
 
@@ -184,6 +188,10 @@ $ul.addEventListener('click', function (event) {
   if (event.target.getAttribute('name') === 'icon') {
     // Show the entry form if an edit icon was clicked.
     viewSwapping('code-journal');
+
+    // Change the title to Edit Entry
+    var $title = document.querySelectorAll('h3');
+    $title[0].textContent = 'Edit Entry';
 
     // Find the matching entry object in the data model
     // and assign it to the data model's editing property if an edit icon was clicked.
