@@ -250,3 +250,9 @@ function deleteEnterButtonClick(event) {
     $popup.classList.remove('hidden');
   }
 }
+
+// Hide the modal if the user clicks Cancel
+var $cancelButton = document.querySelector('.cancel-button');
+$cancelButton.addEventListener('click', function () {
+  $popup.classList.add('hidden');
+});
