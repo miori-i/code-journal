@@ -17,36 +17,85 @@ var $form = document.querySelector('form');
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
 
-  // Put the form's input values into a new object.
-  var entry = {};
-  entry.title = $form.elements.title.value;
-  entry.photoUrl = $form.elements['photo-url'].value;
-  entry.notes = $form.elements.notes.value;
+  // Edit the existing data object
+  if (data.editing !== null) {
+    for (var i = 0; i < data.entries.length; i++) {
 
-  // Add the nextEntryId to the object.
-  entry.nextEntryId = data.nextEntryId;
+      if (data.entries[i].title === data.editing.title) {
+        // update the existing object in entries.
 
-  // Increment the nextEntryId on the data model.
-  data.nextEntryId++;
+        var titleInEditingBeforeUpdated = data.editing.title;
 
-  // Prepend the new object to the entries in the data model.
-  data.entries.unshift(entry);
+        data.entries[i].title = $form.elements.title.value;
+        data.entries[i].photoUrl = $form.elements['photo-url'].value;
+        data.entries[i].notes = $form.elements.notes.value;
+        data.entries[i].nextEntryId = data.editing.nextEntryId;
 
-  // Reset the image preview's `src' attribute.
-  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+        // Update the existing DOM and adds it to the page
+        var $doms = document.querySelectorAll('li[data-entry-id]');
+        for (var n = 0; n < $doms.length; n++) {
+          if ($doms[n].getAttribute('data-entry-id') === titleInEditingBeforeUpdated) {
+            var $updatedDOMtree = renderEntry(data.entries[i]);
+            $doms[n].replaceWith($updatedDOMtree);
+          }
+        }
 
-  // Reset the form inputs.
-  $form.reset();
+        // Reset the title for the form
+        var $title = document.querySelectorAll('h3');
+        $title[0].textContent = 'New Entry';
 
-  // Creates a new DOM tree for it and adds it to the page
-  var $newDOMtree = renderEntry(entry);
-  $ul.prepend($newDOMtree);
+        // Reset the image preview's `src' attribute.
+        $img.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  // Automatically shows the 'entries' view without reloading the page.
-  viewSwapping('entries');
+        // Reset the form inputs.
+        $form.reset();
 
-  // Removes the p element that shows there is no entry
-  $paragraph.remove();
+        // Automatically shows the 'entries' view without reloading the page.
+        viewSwapping('entries');
+
+        // Remove "Delete Entry" button
+        var $deleteEntryButton = document.querySelector('.delete-entry-button');
+        $deleteEntryButton.remove();
+      }
+    }
+
+    // Add new object to entries array
+  } else if (data.editing === null) {
+
+    // Put the form's input values into a new object.
+    var entry = {};
+    entry.title = $form.elements.title.value;
+    entry.photoUrl = $form.elements['photo-url'].value;
+    entry.notes = $form.elements.notes.value;
+
+    // Add the nextEntryId to the object.
+    entry.nextEntryId = data.nextEntryId;
+
+    // Increment the nextEntryId on the data model.
+    data.nextEntryId++;
+
+    // Prepend the new object to the entries in the data model.
+    data.entries.unshift(entry);
+
+    // Creates a new DOM tree for it and adds it to the page
+    var $newDOMtree = renderEntry(entry);
+    $ul.prepend($newDOMtree);
+
+    // Reset the image preview's `src' attribute.
+    $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+
+    // Reset the form inputs.
+    $form.reset();
+
+    // Automatically shows the 'entries' view without reloading the page.
+    viewSwapping('entries');
+
+    // Removes the p element that shows there is no entry
+    $paragraph.remove();
+  }
+  // Reset the value of data.editing
+  data.editing = null;
+
 });
 
 // Define a function that takes a single journal entry object and
@@ -55,6 +104,7 @@ $form.addEventListener('submit', function (event) {
 function renderEntry(object) {
 
   var $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', object.title);
 
   var $container = document.createElement('div');
   $container.setAttribute('class', 'container3');
@@ -77,12 +127,18 @@ function renderEntry(object) {
   $row.appendChild($columnHalf2);
 
   var $h2 = document.createElement('h2');
+  $h2.setAttribute('class', 'placing-icon');
   $h2.textContent = object.title;
   $columnHalf2.appendChild($h2);
 
   var $p = document.createElement('p');
   $p.textContent = object.notes;
   $columnHalf2.appendChild($p);
+
+  var $icon = document.createElement('i');
+  $icon.setAttribute('class', 'fa-solid fa-pencil fa-sm edit-icon');
+  $icon.setAttribute('name', 'icon');
+  $h2.appendChild($icon);
 
   return $li;
 
@@ -129,10 +185,66 @@ function viewSwapping(dataView) {
   }
 }
 
+// Listen for clicks on the parent element of all rendered entries.
+// the parent element = $ul
+$ul.addEventListener('click', function (event) {
+  // console.log('$ul', $ul);
+  // console.log('event.target:', event.target);
+  // console.log('event.target.getAttribute("name"):', event.target.getAttribute('name'));
+  if (event.target.getAttribute('name') === 'icon') {
+    // Show the entry form if an edit icon was clicked.
+    viewSwapping('code-journal');
+
+    // Change the title to Edit Entry
+    var $title = document.querySelectorAll('h3');
+    $title[0].textContent = 'Edit Entry';
+
+    // Find the matching entry object in the data model
+    // and assign it to the data model's editing property if an edit icon was clicked.
+    var dataEntryId = event.target.closest('li').getAttribute('data-entry-id');
+    // console.log('dataEntryId:', dataEntryId);
+    for (var i = 0; i < data.entries.length; i++) {
+      if (dataEntryId === data.entries[i].title) {
+        data.editing = data.entries[i];
+      }
+    }
+
+    // Pre-populate the entry form with the clicked entry's values from the object found in the data model.
+    $form.elements.title.value = data.editing.title;
+    $form.elements['photo-url'].value = data.editing.photoUrl;
+    $img.setAttribute('src', data.editing.photoUrl);
+    $form.elements.notes.value = data.editing.notes;
+
+    // console.log('event.target:', event.target);
+    // console.log('event.target.closest("li"):', event.target.closest('li'));
+    // console.log('dataEntryId:', dataEntryId);
+    // console.log('data.editing.title:', data.editing.title);
+
+    // Add "Delete Entry" button
+    var $saveButton = document.querySelector('.save-button');
+    var $deleteEntryButton = document.createElement('button');
+    $deleteEntryButton.setAttribute('class', 'delete-entry-button');
+    $deleteEntryButton.textContent = 'Delete Entry';
+    $saveButton.appendChild($deleteEntryButton);
+
+  }
+
+});
+
 // Shows that there is no entry added
 if (data.entries.length === 0) {
   var $paragraph = document.createElement('p');
   $paragraph.textContent = 'No entries have been recorded.';
   $paragraph.setAttribute('class', 'no-entries');
   $ul.appendChild($paragraph);
+}
+
+// Add a click target for deleting an entry to the entry form
+$form.addEventListener('click', deleteEnterButtonClick);
+
+function deleteEnterButtonClick(event) {
+  // console.log(event.target);
+  if (event.target.getAttribute('class') === 'delete-entry-button') {
+    // console.log('clicked!');
+  }
 }
