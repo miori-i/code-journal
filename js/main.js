@@ -242,9 +242,11 @@ if (data.entries.length === 0) {
 // Add a click target for deleting an entry to the entry form
 $form.addEventListener('click', deleteEnterButtonClick);
 
+var $popup = document.querySelector('.popup');
 function deleteEnterButtonClick(event) {
   // console.log(event.target);
   if (event.target.getAttribute('class') === 'delete-entry-button') {
-    // console.log('clicked!');
+    // console.log($popup.classList);
+    $popup.classList.remove('hidden');
   }
 }
