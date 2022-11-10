@@ -228,7 +228,6 @@ $ul.addEventListener('click', function (event) {
     $saveButton.appendChild($deleteEntryButton);
 
   }
-
 });
 
 // Shows that there is no entry added
@@ -239,15 +238,19 @@ if (data.entries.length === 0) {
   $ul.appendChild($paragraph);
 }
 
+// ---------------------- editing -------------------------------------
+
 // Add a click target for deleting an entry to the entry form
+var $popup = document.querySelector('.popup');
 $form.addEventListener('click', deleteEnterButtonClick);
 
-var $popup = document.querySelector('.popup');
 function deleteEnterButtonClick(event) {
+  event.preventDefault();
   // console.log(event.target);
   if (event.target.getAttribute('class') === 'delete-entry-button') {
-    // console.log($popup.classList);
+    // console.log('delete entry clicked!');
     $popup.classList.remove('hidden');
+
   }
 }
 
@@ -256,3 +259,11 @@ var $cancelButton = document.querySelector('.cancel-button');
 $cancelButton.addEventListener('click', function () {
   $popup.classList.add('hidden');
 });
+
+// Remove the entry from the data model and the entry's DOM tree from the page if the user clicks Delete
+var $confirmButton = document.querySelector('.confirm-button');
+$confirmButton.addEventListener('click', confirmClick);
+
+function confirmClick() {
+  // console.log('data.editing:', data.editing);
+}
