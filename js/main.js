@@ -239,8 +239,6 @@ if (data.entries.length === 0) {
   $ul.appendChild($paragraph);
 }
 
-// ---------------------- editing -------------------------------------
-
 // Add a click target for deleting an entry to the entry form
 var $popup = document.querySelector('.popup');
 $form.addEventListener('click', deleteEnterButtonClick);
@@ -282,5 +280,7 @@ function confirmClick() {
   // Reset the value of data.editing
   data.editing = null;
 
+  // Show the Entries list if the user clicks Delete.
+  viewSwapping('entries');
   $popup.classList.add('hidden');
 }
