@@ -91,7 +91,7 @@ $form.addEventListener('submit', function (event) {
     viewSwapping('entries');
 
     // Removes the p element that shows there is no entry
-    $paragraph.remove();
+    // $paragraph.remove();
   }
   // Reset the value of data.editing
   data.editing = null;
@@ -224,6 +224,7 @@ $ul.addEventListener('click', function (event) {
     var $saveButton = document.querySelector('.save-button');
     var $deleteEntryButton = document.createElement('button');
     $deleteEntryButton.setAttribute('class', 'delete-entry-button');
+    $deleteEntryButton.setAttribute('type', 'button');
     $deleteEntryButton.textContent = 'Delete Entry';
     $saveButton.appendChild($deleteEntryButton);
 
@@ -245,7 +246,6 @@ var $popup = document.querySelector('.popup');
 $form.addEventListener('click', deleteEnterButtonClick);
 
 function deleteEnterButtonClick(event) {
-  event.preventDefault();
   // console.log(event.target);
   if (event.target.getAttribute('class') === 'delete-entry-button') {
     // console.log('delete entry clicked!');
@@ -264,6 +264,23 @@ $cancelButton.addEventListener('click', function () {
 var $confirmButton = document.querySelector('.confirm-button');
 $confirmButton.addEventListener('click', confirmClick);
 
+// --- remove the entry from the data model
 function confirmClick() {
-  // console.log('data.editing:', data.editing);
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.editing.title === data.entries[i].title) {
+      data.entries.splice(i, 1);
+    }
+  }
+  // --- remove the entry's DOM tree from the page
+  var $doms = document.querySelectorAll('li[data-entry-id]');
+  for (var n = 0; n < $doms.length; n++) {
+    if ($doms[n].getAttribute('data-entry-id') === data.editing.title) {
+      $doms[n].remove();
+    }
+  }
+
+  // Reset the value of data.editing
+  data.editing = null;
+
+  $popup.classList.add('hidden');
 }
