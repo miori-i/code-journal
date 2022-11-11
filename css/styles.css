@@ -181,7 +181,7 @@ h2 {
 .buttons-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin: 30px 5px 0;
 }
 
 .cancel-button {
@@ -247,6 +247,10 @@ h2 {
   .container2 {
     padding: 45px 24px;
     padding-bottom: 5px;
+  }
+
+  .buttons-wrapper {
+    margin: 25px 18px 0;
   }
 }
 
