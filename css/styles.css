@@ -151,6 +151,7 @@ h2 {
   margin-top: 0;
 }
 
+
 .hidden {
   display: none;
 }
@@ -198,6 +199,7 @@ h2 {
   background-color: #dc2626;
   padding: 5px 8px;
 }
+
 
 /* ----- media query -----  */
 
@@ -247,10 +249,12 @@ h2 {
   .container2 {
     padding: 45px 24px;
     padding-bottom: 5px;
+
   }
 
   .buttons-wrapper {
     margin: 25px 18px 0;
+
   }
 }
 

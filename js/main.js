@@ -15,11 +15,14 @@ var $form = document.querySelector('form');
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
 
+
   // Edit the existing data object and the exisiting DOM
+
   if (data.editing !== null) {
     for (var i = 0; i < data.entries.length; i++) {
 
       if (data.entries[i].title === data.editing.title) {
+
         // --- Update the existing object in entries.
         var titleInEditingBeforeUpdated = data.editing.title;
         data.entries[i].title = $form.elements.title.value;
@@ -56,6 +59,7 @@ $form.addEventListener('submit', function (event) {
     }
 
     // Add new object to entries array
+
   } else if (data.editing === null) {
 
     // Put the form's input values into a new object.
@@ -73,6 +77,7 @@ $form.addEventListener('submit', function (event) {
     // Prepend the new object to the entries in the data model.
     data.entries.unshift(entry);
 
+
     // Creates a new DOM tree for it and adds it to the page
     var $newDOMtree = renderEntry(entry);
     $ul.prepend($newDOMtree);
@@ -88,6 +93,7 @@ $form.addEventListener('submit', function (event) {
   }
   // Reset the value of data.editing
   data.editing = null;
+
 });
 
 // Define a function that takes a single journal entry object and
@@ -130,6 +136,8 @@ function renderEntry(object) {
   $icon.setAttribute('class', 'fa-solid fa-pencil fa-sm edit-icon');
   $icon.setAttribute('name', 'icon');
   $h2.appendChild($icon);
+
+
 
   return $li;
 }
@@ -181,9 +189,11 @@ function viewSwapping(dataView) {
 }
 
 // Listen for clicks on the parent element of all rendered entries.
+
 // (the parent element = $ul)
 $ul.addEventListener('click', function (event) {
   if (event.target.getAttribute('name') === 'icon') {
+
 
     // Show the entry form if an edit icon was clicked.
     viewSwapping('code-journal');
@@ -195,6 +205,8 @@ $ul.addEventListener('click', function (event) {
     // Find the matching entry object in the data model
     // and assign it to the data model's editing property if an edit icon was clicked.
     var dataEntryId = event.target.closest('li').getAttribute('data-entry-id');
+
+
     for (var i = 0; i < data.entries.length; i++) {
       if (dataEntryId === data.entries[i].title) {
         data.editing = data.entries[i];
@@ -206,6 +218,7 @@ $ul.addEventListener('click', function (event) {
     $form.elements['photo-url'].value = data.editing.photoUrl;
     $img.setAttribute('src', data.editing.photoUrl);
     $form.elements.notes.value = data.editing.notes;
+
 
     // Add "Delete Entry" button
     var $saveButton = document.querySelector('.save-button');
@@ -274,4 +287,5 @@ function confirmClick() {
   // Remove "Delete Entry" button
   var $deleteEntryButton = document.querySelector('.delete-entry-button');
   $deleteEntryButton.remove();
+
 }
