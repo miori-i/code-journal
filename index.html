@@ -45,9 +45,11 @@
   <main>
     <!-- ----- entry form ----- -->
     <div data-view="entry-form" class="view">
+
       <div class="container">
         <h3 class="new-entry">New Entry</h3>
       </div>
+
       <form>
         <div class="container">
           <div class="row">
@@ -92,7 +94,6 @@
 
     <!-- ----- entries ----- -->
     <div data-view="entries" class="view hidden">
-
       <div class="container2">
         <ul class="h3-and-newbutton-unordered-list">
           <li>
@@ -100,11 +101,25 @@
           </li>
         </ul>
       </div>
-
+      <p class="no-entries">No entries have been recorded.</p>
       <ul class="entries-unordered-list">
       </ul>
     </div>
 
+    <!-- popup -->
+    <div class="row popup hidden">
+      <div class="popup-wrapper">
+        <div class="column-full">
+          <p class="confirm-text">Are you sure you want to delete this entry?</p>
+        </div>
+        <div class="column-full">
+          <div class="buttons-wrapper">
+            <button class="cancel-button" type="button">CANCEL</button>
+            <button class="confirm-button" type="button">CONFIRM</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
   <script src="js/data.js"></script>
